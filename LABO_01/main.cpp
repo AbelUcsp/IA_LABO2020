@@ -1,6 +1,6 @@
 #include "grafo.hpp"
 
-int puntoB[144];
+int puntoB[200];
 
 
 void displayGizmo()
@@ -10,6 +10,7 @@ void displayGizmo()
 	for (i = 0; i < 144; ++i) {
 		glColor3d(0, 255, 0);
 		//glVertex2d(hull[i].x, hull[i].y);
+
 		glVertex2d(i, puntoB[i]);
 
 	}
@@ -17,24 +18,6 @@ void displayGizmo()
 }
 
 
-
-
-/**
-void OnMouseClick(int button, int state, int x, int y)
-{
-	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-	{
-		//convertir x,y
-		//insertar un nuevo punto en el quadtree
-	}
-}
-
-void OnMouseMotion(int x, int y)
-{
-	//opcional
-	//hacer algo x,z cuando se mueve el mouse
-}
-*/
 
 
 void idle() { // AGREGAR ESTA FUNCION
@@ -100,18 +83,25 @@ int main(int argc, char** argv) {
 	//vector<Point> a = { {0, 3}, {1, 1}, {2, 2}, {4, 4}, {0, 0}, { 1, 2 }, { 3, 1 }, { 3, 3 } };
 
 
-	int PUNTOC[144] = { 3, 8, 2, 2, 1, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-	6, 6, 3, 4, 4, 4, 4, 0, 0, 0, 0, 0, 1, 0, 0 ,0, 0, 0,
-	0, 4, 1, 2, 1, 1, 3, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0,
-	2, 7, 1, 0, 5, 1, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,
-	4, 2, 4, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 ,0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 4, 2, 3, 1, 1, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 3, 2, 0, 1,
-	0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 5, 0, 3, 4, 4 };
-
+	int PUNTOC[200];
 	for (int i = 0; i < 10; i++) {
 
 		puntoB[i] = PUNTOC[i];
+	}
+
+
+	grafoIA A(100);
+
+	nodo* tmp = A.root->tmp;
+	for (unsigned int i = 4; i < 100; ++i) {///99-99
+		nodo* tmp_ = A.root->add100(tmp, 100, i * 100, i);
+		tmp = tmp_;
+	}
+
+	A.ANCHURA(A.root->child[98]->child[1]->child[1], A.root);
+	for (int i = 0; i < 200; i++) {
+
+		PUNTOC[i] = A.caminoX[i];
 	}
 
 
@@ -121,11 +111,6 @@ int main(int argc, char** argv) {
 
 
 
-
-	//puntos.push_back(a[j]);
-
-
-//system("pause");
 //Inicializacion de la GLUT
 	glutInit(&argc, argv); //incia GLUT
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB); // modo video dos buffer || modo video RGB

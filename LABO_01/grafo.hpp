@@ -14,6 +14,31 @@
 
 using namespace std;
 
+class punto {
+	public:
+		int x;
+		int y;
+		bool visitado;
+		bool agregado;
+		float costo;
+		punto() { x = y = 0; visitado = agregado = false; }
+
+
+		punto operator=(const punto &A) {
+			x = A.x;
+			y = A.y;
+			return *this;
+		}
+
+		bool operator== (const punto &B) {
+			if (this->x == B.x && this->y == B.y) {
+				return true;
+			}
+			return false;
+		}
+
+};
+
 class nodo {
 public:
 	int dato;
@@ -137,45 +162,16 @@ public:
 		return return_;
 	}
 
+	/**
 	void eliminar(nodo* current, nodo*& root) {///ANCHURA/AMPLITUD
 		///cout << "elimnar " <<current->dato <<endl;
 		//cout << root->child[1]->dato;
 		for (std::size_t i = 2; i < 20; ++i) {
 			root->child[i]->child[1] = nullptr;
-
-
-
 		}
 		root->child[1]->child[0] = nullptr;
-		/*
-			queue<nodo *> cola;
-			for (std::size_t i = 0; i < 100; ++i){
-				cola.push(root->child[i]);
-			}
-			while(!cola.empty()){
-				if(cola.front()){
-					if(current->dato == cola.front()->dato){
-
-					   // for (std::size_t i = 0; i < 20; ++i){
-							//if( current != nullptr  ){
-								//cout << "si "<<cola.front()->dato << " ";
-								current->child[0] = nullptr;
-								current->child[1] = nullptr;
-							//}
-						   // break;
-					   // }
-
-					}
-
-					cola.push(cola.front()->child[1]);
-					//cola.push(cola.front()->nodes[1]);
-				}
-				cola.pop();
-			}
-			*/
-
-			//stack<nodo* >
-	}
+	
+	}*/
 
 	void setXY(int x, int y) {
 		this->x = x;
@@ -190,40 +186,96 @@ public:
 class grafoIA {
 public:
 	nodo* root;
+	int camino[200];
+	int caminoX[200];
+	int caminoY[200];
+	int tamanho;
 
+	struct struc_comparar {
+		bool operator()(punto *&P, punto *&Q) {
+			return P->costo > Q->costo;
+		}
+	};
+
+	priority_queue<punto *, vector<punto* >, struc_comparar > menor;
+
+	vector<punto *> Path;
+	
+
+		//int puntoB[144];
 	grafoIA(int cantidad) {
 		root = new nodo(cantidad);
 		root->setDATA(-1);
+		tamanho = 0;
 
 	}
 
-	void ANCHURA(nodo* current, nodo*& root) {///ANCHURA/AMPLITUD
-		///cout << "elimnar " <<current->dato <<endl;
+
+	void ANCHURA(nodo* destino,  nodo*& root) {///ANCHURA/AMPLITUD
 		queue<nodo*> cola;
+		
+		int indice = 0;
 		for (std::size_t i = 0; i < 100; ++i) {
 			cola.push(root->child[i]);
 		}
 		while (!cola.empty()) {
 			if (cola.front()) {
 				cout << cola.front()->dato << " ";
-				/*
-			if(current->dato == cola.front()->dato){
-
-			   // if( current != nullptr  ){
-
-					current->child[0] = nullptr;
-					current->child[1] = nullptr;
-				//}
-			}
-			*/
+				caminoX[indice] = cola.front()->x;
+				caminoY[indice] = cola.front()->y;
+				indice++;
+		
 				cola.push(cola.front()->child[1]);
-				//cola.push(cola.front()->nodes[1]);
-
 			}
 			cola.pop();
 		}
-
-		//stack<nodo* >
 	}
 
+
+
+	float euclides(punto P, punto N) {
+		return sqrt(pow(abs(N.x - P.x), 2) + pow(abs(N.y - P.y), 2));
+	}
+
+	///euclidean
+
+	bool A_asterisco(punto &P, punto &N, nodo *root) {
+		float G;
+		float H;
+		int indice = 0;
+		punto *visitado;
+		menor.push(&P);
+		while (!menor.empty()) {
+			camino[indice] = visitado->x;
+			camino[indice] = visitado->y;
+			indice++;
+			visitado = menor.top();
+			visitado->visitado = true;
+			menor = priority_queue<punto*, vector<punto* >, struc_comparar>();
+			if (*visitado == N) {
+				return true;
+			}
+			
+			else {
+				for (unsigned int i = 0; i < 100; i++) {
+					if (root->child[i]->child[1] == false) {
+						G = euclides(P, N);
+						punto A;
+						A.x = root->child[i]->child[1]->x;
+						A.x = root->child[i]->child[1]->y;
+						H = euclides(A, N);
+						root->child[i]->child[1] = root->child[i]->child[1]->child[1];
+						visitado->visitado = G + H;
+						menor.push(visitado);
+					}
+				}
+			}
+
+			
+		}
+		return false;
+	}
+
+
 };
+
