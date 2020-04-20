@@ -1,8 +1,8 @@
 # IA_LABO2020
 
 
-Grupo:
-Abel Hancco Soncco
-Juan Gabriel Tupac Lazo
-Juan Velasquez Malaga
-Jose Gabriel Zevallos Delgado de la Flor
+Grupo:<br/>
+Abel Hancco Soncco<br/>
+Juan Gabriel Tupac Lazo<br/>
+Juan Velasquez Malaga<br/>
+Jose Gabriel Zevallos Delgado de la Flor<br/>
