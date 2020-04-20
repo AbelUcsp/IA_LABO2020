@@ -1,0 +1,10 @@
+﻿  main.cpp
+C:\Users\Abel\Desktop\IA\IA_LABO2020\LABO_01\grafo.hpp(40,29): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Abel\Desktop\IA\IA_LABO2020\LABO_01\grafo.hpp(94,29): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Abel\Desktop\IA\IA_LABO2020\LABO_01\main.cpp(94,2): warning C4065: la instrucción switch contiene etiquetas 'default' pero no etiquetas 'case'
+  Generando código
+  2 of 9 functions (22.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Generación de código finalizada
+  Busqueda.vcxproj -> C:\Users\Abel\Desktop\IA\IA_LABO2020\LABO_01\Release\Busqueda.exe
