@@ -10,11 +10,61 @@ int global_Y;
 int global = 0;
 
 int deepGlobal = 0;
+bool GANO = false;
+
 vector<int > plano;
 vector< pair<int, int> >coordenadas;
 
 int player; ///0 pc,		1 persona,		-1 free
 bool turno; ///false pc-red,	true persona-blue
+
+int termino( vector<int> tabla = plano) {
+	int jugador = 1;
+	int ppc = 0;
+	
+	if ((tabla[0] == jugador ) && (tabla[4] == jugador ) && (tabla[8] == jugador )) ///diagonal 1
+		return jugador;
+	else if ((tabla[0] == ppc) && (tabla[4] == ppc) && (tabla[8] == ppc)) ///diagonal 1
+		return ppc;
+
+	if ((tabla[2] == jugador ) && (tabla[4] == jugador ) && (tabla[6] == jugador )) ///diagonal 2
+		return jugador;
+	else if ((tabla[2] == ppc) && (tabla[4] == ppc) && (tabla[6] == ppc)) ///diagonal 2
+		return ppc;
+
+
+	if ((tabla[0] == jugador ) && (tabla[1] == jugador ) && (tabla[2] == jugador )) ///HORIZONTAL 2
+		return jugador;
+	else if ((tabla[0] == ppc) && (tabla[1] == ppc) && (tabla[2] == ppc)) ///HORIZONTAL 2
+		return ppc;
+
+	if ((tabla[3] == jugador ) && (tabla[4] == jugador ) && (tabla[5] == jugador )) ///diagonal 2
+		return jugador;
+	else if ((tabla[3] == ppc) && (tabla[4] == ppc) && (tabla[5] == ppc)) ///diagonal 2
+		return ppc;
+
+	if ((tabla[6] == jugador ) && (tabla[7] == jugador ) && (tabla[8] == jugador )) ///diagonal 2
+		return jugador;
+	else if ((tabla[6] == ppc) && (tabla[7] == ppc) && (tabla[8] == ppc)) ///diagonal 2
+		return ppc;
+
+	if ((tabla[0] == jugador ) && (tabla[3] == jugador ) && (tabla[6] == jugador )) ///VERTICAL 2
+		return jugador;
+	else if ((tabla[0] == ppc) && (tabla[3] == ppc) && (tabla[6] == ppc)) ///VERTICAL 2
+		return ppc;
+
+	if ((tabla[1] == jugador ) && (tabla[4] == jugador ) && (tabla[7] == jugador )) ///diagonal 2
+		return jugador;
+	else if ((tabla[1] == ppc) && (tabla[4] == ppc) && (tabla[7] == ppc)) ///diagonal 2
+		return ppc;
+
+	if ((tabla[2] == jugador ) && (tabla[5] == jugador ) && (tabla[8] == jugador )) ///diagonal 2
+		return jugador;
+	else if ((tabla[2] == ppc) && (tabla[5] == ppc) && (tabla[8] == ppc)) ///diagonal 2
+		return ppc;
+	
+	return 2;
+}
 
 int getGoodMove(MiniMax* minimaxtree)
 {
@@ -98,17 +148,7 @@ void displayGizmo()
 		glEnd();
 	}
 
-
-	/*
-	for (size_t i = 0; i < 9; ++i)
-		cout << plano[i] << " ";
-	*/
-	//cout << global << " global ";
-	//cout << endl;
-
-
 	glFlush(); ///limpia buffer
-
 }
 
 
@@ -120,9 +160,7 @@ void glPaint(void) {
 	//glOrtho(0, 3.0f, 0, 3.0f, -1.0f, 1.0f);
 	glOrtho(0, width, 0, height, 1.0f, -1.0f);
 
-
 	displayGizmo();
-	//displayGizmo2();
 
 	//doble buffer, mantener esta instruccion al fin de la funcion
 	glutSwapBuffers();
@@ -136,11 +174,24 @@ void init_GL(void) {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f); //(R, G, B, transparencia) en este caso un fondo negro
 	glPointSize(15);
 
+
+
+
 	//modo projeccion
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 }
 
+
+int funcionPC(int variable) {
+
+	return variable++;
+}
+
+int funcionHUM(int variable) {
+
+	return variable--;
+}
 
 //en el caso que la ventana cambie de tama?o
 GLvoid window_redraw(GLsizei width, GLsizei height) {
@@ -153,58 +204,55 @@ void OnMouseClick(int button, int state, int x, int y)
 {
 	global_X = x;
 	global_Y = y;
-	//global++;
-	int player_id = -1;
 
 
+	
 	int GM_;
 	int TheChosenOne;
 	cout << "IA move now : " << endl;
-	MiniMax* SKYNET;
-	SKYNET = new MiniMax(deepGlobal, true, false, board, 'B');
-	cout << "mimimax tree done..." << endl;
-	GM_ = getGoodMove(SKYNET);
-	cout << "GM: " << GM_ << endl;
-	for (size_t i = 0; i < SKYNET->sons.size(); i++)
+	MiniMax *PC_IA;
+	PC_IA = new MiniMax(deepGlobal, true, false, board, 'B');
+	//cout << "mimimax tree done..." << endl;
+	GM_ = getGoodMove(PC_IA);
+	//cout << "GM: " << GM_ << endl;
+	for (size_t i = 0; i < PC_IA->sons.size(); i++)
 	{
-		if (SKYNET->sons[i]->MinimaxVal == GM_)
+		if (PC_IA->sons[i]->MinimaxVal == GM_)
 		{
 			TheChosenOne = i;
 		}
 	}
+
 	std::size_t indice;
 	for (indice = 0; indice < 9; ++indice) {
-		if (board[indice] != SKYNET->sons[TheChosenOne]->internalBoard[indice]) {
-			//cout << "I " << SKYNET->sons[TheChosenOne]->internalBoard[indice] << endl;
+		if (board[indice] != PC_IA->sons[TheChosenOne]->internalBoard[indice]) {
 			break;
 		}
 	}
 
-	board = SKYNET->sons[TheChosenOne]->internalBoard;
+	board = PC_IA->sons[TheChosenOne]->internalBoard;
 	plano[indice] = 0;
-	cout << " ---------Gameplay--------- " << indice << endl;
-	//printboardchar(board);
-
-
-	cout << "Write pos of move [0-8]" << endl;
-	int val; cin >> val;
-	board[val] = 'A';
-	plano[val] = 1;
-	//printboardchar(board);
-
-	
-
-	
-
-
-	///END
-	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-	{
-		//cout << "x: " << x << endl;
-		//cout << "y: " << y << endl;
-
+	if (termino() == 0){
+		cout << " PC GANO " << termino() <<  endl;
+		return;
 	}
+
+	//glPaint();
+	glutDisplayFunc(glPaint);
+	cout << "escoge la posicion [0,1,2.....,8]" << endl;
+	int ind; cin >> ind;
+	//int val = ;
+	board[ind] = 'A';
+	plano[ind] = 1;
 	
+	if (termino() == 1) {
+		cout << " HUMAN GANO " << termino() << endl;
+		return;
+	}
+	//glPaint();
+	//glutDisplayFunc(glPaint);
+	
+
 	/**
 	if (player == 1) {
 		player_id = 1;
@@ -216,7 +264,7 @@ void OnMouseClick(int button, int state, int x, int y)
 	}
 	*/
 
-
+	
 	///INICIO CUADRICULA
 	if ( (x > 0 && x < 100) && (y > 0 && y < 100)) {
 		if (turno==true && plano[0] == -1) {
@@ -227,7 +275,6 @@ void OnMouseClick(int button, int state, int x, int y)
 			plano[0] = 0;
 		turno = !turno;
 		}
-		cout << "bool " << turno << endl;
 	}
 	else if ((x > 100 && x < 200) && (y > 0 && y < 100)) {
 		if (turno == true  && plano[1] == -1){
@@ -238,7 +285,6 @@ void OnMouseClick(int button, int state, int x, int y)
 			plano[1] = 0;
 			turno = !turno;
 		}
-		cout << "bool " << turno << endl;
 	}
 	else if ((global_X > 200 && global_X < 300) && (global_Y > 0 && global_Y < 100)) {
 
@@ -250,7 +296,6 @@ void OnMouseClick(int button, int state, int x, int y)
 			plano[2] = 0;
 			turno = !turno;
 		}
-		cout << "bool " << turno << endl;
 	}
 
 	else if ((global_X > 0 && global_X < 100) && (global_Y > 100 && global_Y < 200)) {
@@ -263,7 +308,6 @@ void OnMouseClick(int button, int state, int x, int y)
 			plano[3] = 0;
 			turno = !turno;
 		}
-		cout << "bool " << turno << endl;
 	}
 	else if ((global_X > 100 && global_X < 200) && (global_Y > 100 && global_Y < 200)) {
 
@@ -275,7 +319,6 @@ void OnMouseClick(int button, int state, int x, int y)
 			plano[4] = 0;
 			turno = !turno;
 		}
-		cout << "bool " << turno << endl;
 	}
 	else if ((global_X > 200 && global_X < 300) && (global_Y > 100 && global_Y < 200)) {
 
@@ -287,7 +330,6 @@ void OnMouseClick(int button, int state, int x, int y)
 			plano[5] = 0;
 			turno = !turno;
 		}
-		cout << "bool " << turno << endl;
 	}
 	else if ((global_X > 0 && global_X < 100) && (global_Y > 200 && global_Y < 300)) {
 
@@ -299,7 +341,6 @@ void OnMouseClick(int button, int state, int x, int y)
 			plano[6] = 0;
 			turno = !turno;
 		}
-		cout << "bool " << turno << endl;
 	}
 	else if ((global_X > 100 && global_X < 200) && (global_Y > 200 && global_Y < 300)) {
 
@@ -311,7 +352,6 @@ void OnMouseClick(int button, int state, int x, int y)
 			plano[7] = 0;
 		turno = !turno;
 		}
-		cout << "bool " << endl;
 	}
 	else if ((global_X > 200 && global_X < 300) && (global_Y > 200 && global_Y < 300)) {
 
@@ -322,15 +362,10 @@ void OnMouseClick(int button, int state, int x, int y)
 		else if (!turno && plano[8] == -1){
 			plano[8] = 0;
 			turno = !turno;
-	}
-		cout << "bool " << endl;
+		}
 	}
 	///END CUADRICULA
 
-	/**
-	for (auto i : coordenadas)
-		cout << i.first << " " << i.second << endl;
-	*/
 
 	cout << endl;
 }
@@ -346,10 +381,6 @@ GLvoid window_key(unsigned char key, int x, int y) {
 
 
 int main(int argc, char** argv) {
-
-	//int player = -1;
-	//cout << "Quien Inicia Jugador o IA (?";
-	//cin >> player; //0-1
 
 	turno = (bool)player;
 	for (size_t i = 0; i < 9; ++i)
@@ -380,10 +411,10 @@ int main(int argc, char** argv) {
 		plano.push_back(-1);
 
 	cout << "Insert deep tree: "; cin >> deepGlobal;
-	bool winval = false;
-	string test;
 	startBoard();
-	printboardchar(board);
+
+
+	///printboardchar(board);
 
 
 	/*
@@ -441,10 +472,6 @@ int main(int argc, char** argv) {
 
 
 
-
-	//cout << tic_toe.root->hijos[0]->hijos[0]->hoja  << endl;
-
-
 	glutInit(&argc, argv); //incia GLUT
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB); // modo video dos buffer || modo video RGB
 	glutInitWindowSize(width, height); //tama?o de la ventana
@@ -454,10 +481,14 @@ int main(int argc, char** argv) {
 	init_GL(); //funcion de inicializacion de OpenGL
 
 	glutDisplayFunc(glPaint);
-	glutReshapeFunc(&window_redraw);
+
+	//glutReshapeFunc(&window_redraw);
+
 	// Callback del teclado
-	glutKeyboardFunc(&window_key);
+	//glutKeyboardFunc(&window_key);
 	glutMouseFunc(&OnMouseClick);
+
+	//glutDisplayFunc(glPaint);
 
 	//glutMotionFunc(&OnMouseMotion);
 	glutMainLoop(); //bucle de rendering

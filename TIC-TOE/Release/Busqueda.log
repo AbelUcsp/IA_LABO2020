@@ -1,20 +1,19 @@
 ﻿  main.cpp
 C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(6,11): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
 C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(7,12): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(70,29): warning C4244: 'argumento': conversión de 'float' a 'GLubyte'; posible pérdida de datos
-C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(70,18): warning C4244: 'argumento': conversión de 'float' a 'GLubyte'; posible pérdida de datos
-C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(91,32): warning C4244: 'argumento': conversión de 'float' a 'GLubyte'; posible pérdida de datos
-C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(91,21): warning C4244: 'argumento': conversión de 'float' a 'GLubyte'; posible pérdida de datos
-C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(91,15): warning C4244: 'argumento': conversión de 'float' a 'GLubyte'; posible pérdida de datos
-C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(95,32): warning C4244: 'argumento': conversión de 'float' a 'GLubyte'; posible pérdida de datos
-C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(95,26): warning C4244: 'argumento': conversión de 'float' a 'GLubyte'; posible pérdida de datos
-C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(95,20): warning C4244: 'argumento': conversión de 'float' a 'GLubyte'; posible pérdida de datos
-C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(66,15): warning C4101: 'i': variable local sin referencia
-C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(343,2): warning C4065: la instrucción switch contiene etiquetas 'default' pero no etiquetas 'case'
+C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(120,29): warning C4244: 'argumento': conversión de 'float' a 'GLubyte'; posible pérdida de datos
+C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(120,18): warning C4244: 'argumento': conversión de 'float' a 'GLubyte'; posible pérdida de datos
+C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(141,32): warning C4244: 'argumento': conversión de 'float' a 'GLubyte'; posible pérdida de datos
+C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(141,21): warning C4244: 'argumento': conversión de 'float' a 'GLubyte'; posible pérdida de datos
+C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(141,15): warning C4244: 'argumento': conversión de 'float' a 'GLubyte'; posible pérdida de datos
+C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(145,32): warning C4244: 'argumento': conversión de 'float' a 'GLubyte'; posible pérdida de datos
+C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(145,26): warning C4244: 'argumento': conversión de 'float' a 'GLubyte'; posible pérdida de datos
+C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(145,20): warning C4244: 'argumento': conversión de 'float' a 'GLubyte'; posible pérdida de datos
+C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(116,15): warning C4101: 'i': variable local sin referencia
+C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(378,2): warning C4065: la instrucción switch contiene etiquetas 'default' pero no etiquetas 'case'
   Generando código
-C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\main.cpp(50): warning C4715: 'getGoodMove': no todas las rutas de acceso de control devuelven un valor
-  110 of 274 functions (40.1%) were compiled, the rest were copied from previous compilation.
-    49 functions were new in current compilation
-    30 functions had inline decision re-evaluated but remain unchanged
+  2 of 264 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
   Busqueda.vcxproj -> C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\Release\Busqueda.exe
