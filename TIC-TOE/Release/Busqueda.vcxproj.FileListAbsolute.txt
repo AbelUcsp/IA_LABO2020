@@ -5,3 +5,6 @@ C:\Users\Abel\Desktop\IA_666\IA_LABO2020\LABO_01\Release\Busqueda.exe
 C:\Users\Abel\Desktop\IA\IA\LABO_01\Release\Busqueda.exe
 C:\Users\Abel\Desktop\IA\TIC-TOE\Release\Busqueda.exe
 C:\Users\Abel\Desktop\IA_LAB\IA_LABO2020\TIC-TOE\Release\Busqueda.exe
+C:\Users\Abel\Desktop\EDA-FORK\TIC-TOE\Release\Busqueda.exe
+C:\Users\Abel\Desktop\IA_LABO\IA_LABO2020\TIC-TOE\Release\Busqueda.exe
+C:\Users\Abel\Desktop\IA_LABO\lA_LABO2020\TIC-TOE\Release\Busqueda.exe
